@@ -1,6 +1,6 @@
 # Data Architect Nanodegree program
 
-## Projects
+## 1. Projects
 
 ### [Human Resources Database Design](https://github.com/Sunday-Okey/Data-Architect-Nanodegree/tree/main/Projects/Database-Design)
 
