@@ -27,7 +27,8 @@ The [HR dataset](https://video.udacity-data.com/topher/2020/July/5f2452ca_hr-dat
 
 ## Logical Model
 
-<img width="534" alt="image" src="https://github.com/user-attachments/assets/f24715ae-e583-4a72-a91d-1a474638cd6b" />
+<img width="680" alt="image" src="https://github.com/user-attachments/assets/cd2acab1-4ad2-4fa7-bdd4-fe72b2c69650" />
+
 
 
 ## Phyical Model
