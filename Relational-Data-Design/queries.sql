@@ -106,7 +106,6 @@ CREATE TABLE IF NOT EXISTS "employee_records" (
 
 -- DATA MANIPULATION LANGUAGE (DML)
 
--- DATA MANIPULATION LANGUAGE (DML)
 
 -- Insert into SALARIES table
 INSERT INTO salaries (salary)
@@ -212,4 +211,212 @@ LEFT JOIN
     addresses a ON p.address = a.address
 LEFT JOIN 
     salaries s ON s.salary = p.salary;
+
+-- Question 1: Return a list of employees with Job Titles and Department Names
+
+SELECT emp_nm employees, job AS job_title, dept_nm department
+FROM employees
+JOIN employee_records USING(emp_id)
+JOIN jobs USING (job_id)
+JOIN departments USING (dept_id)
+LIMIT 5;
+
+-- Question 2: Insert Web Programmer as a new job title
+
+INSERT INTO jobs ("job")
+VALUES ('Web Programmer');
+
+-- Question 3: Correct the job title from web programmer to web developer
+
+UPDATE jobs 
+SET "job" = 'Web Developer'
+WHERE "job" = 'Web Programmer';
+
+-- Question 4: Delete the job title Web Developer from the database
+
+DELETE FROM jobs
+WHERE job = 'Web Developer';
+
+-- Question 5: How many employees are in each department?
+
+
+SELECT dept_nm, COUNT(*) no_of_employees
+FROM employees
+JOIN employee_records USING(emp_id)
+JOIN departments USING (dept_id)
+GROUP BY 1;
+
+/* Question 6: Write a query that returns current and past jobs
+(include employee name, job title, department, manager name, start and
+end date for position) for employee Toni Lembeck. */
+
+
+WITH employee_data AS (
+    SELECT
+        er.emp_id,
+        e.emp_nm,
+        j.job,
+        d.dept_nm,
+        er.manager_id,
+        er.start_date,
+        er.end_date
+    FROM employee_records er
+    INNER JOIN employees e 
+        ON er.emp_id = e.emp_id
+    INNER JOIN departments d 
+        ON er.dept_id = d.dept_id
+    INNER JOIN jobs j 
+        ON er.job_id = j.job_id
+)
+
+SELECT
+    e.emp_nm AS employee,
+    e.job AS job_title,
+    e.dept_nm AS department,
+    m.emp_nm AS manager,
+    e.start_date,
+    e.end_date
+FROM employee_data e
+INNER JOIN employee_data m 
+    ON e.manager_id = m.emp_id
+WHERE e.emp_nm = 'Toni Lembeck'
+ORDER BY e.start_date DESC;
+
+
+
+/*Create a view that returns all employee attributes; results should 
+resemble initial Excel file */
+
+DROP VIEW IF EXISTS emp;
+
+CREATE VIEW emp AS (
+WITH employee_data AS (
+    SELECT
+        er.emp_id,
+        e.emp_nm,
+		e.email,
+        j.job,
+        d.dept_nm,
+        er.manager_id,
+        er.start_date,
+        er.end_date,
+		er.hire_date,
+		edu_lvl,
+		salary,
+		address,
+		region_nm,
+		state,
+		city
+    FROM  employees e
+    INNER JOIN employee_records er
+        ON er.emp_id = e.emp_id
+    INNER JOIN departments d 
+        ON er.dept_id = d.dept_id
+    INNER JOIN jobs j 
+        ON er.job_id = j.job_id
+    INNER JOIN education_levels 
+        USING(edu_lvl_id)
+    INNER JOIN salaries 
+        USING(salary_id)
+    INNER JOIN addresses
+        USING(address_id)
+	INNER JOIN cities 
+        USING(city_id)
+    INNER JOIN states 
+        USING(state_id)
+	 INNER JOIN regions 
+        USING(region_id)
+)
+
+SELECT
+	e1.emp_id,
+    e1.emp_nm,
+	e1.email,
+	e1.hire_date AS hire_dt,
+    e1.job AS job_title,
+	e1.salary,
+    e1.dept_nm AS department_nm,
+    m.emp_nm AS manager,
+    e1.start_date AS start_dt,
+    e1.end_date AS end_dt,
+	e1.region_nm location,
+	e1.address,
+	e1.city,
+	e1.state,
+	e1.edu_lvl AS education_level
+FROM employee_data e1
+LEFT JOIN employee_data m 
+    ON e1.manager_id = m.emp_id
+);
+
+SELECT * FROM emp;
+
+
+/* Create a stored procedure with parameters that returns current and past jobs
+(include employee name, job title, department, manager name,
+start and end date for position) when given an employee name. */
+
+
+DROP FUNCTION IF EXISTS GetEmployeeJobHistory(VARCHAR);
+
+CREATE OR REPLACE FUNCTION GetEmployeeJobHistory(employee_name VARCHAR(100))
+RETURNS TABLE (
+    employee VARCHAR(100),
+    job_title VARCHAR,
+    department VARCHAR,
+    manager VARCHAR(100),
+    start_date DATE,
+    end_date DATE
+)
+AS $$
+BEGIN
+    RETURN QUERY 
+    WITH employee_data AS (
+        SELECT
+            er.emp_id,
+            e.emp_nm,
+            j.job,
+            d.dept_nm,
+            er.manager_id,
+            er.start_date,
+            er.end_date
+        FROM employee_records er
+        JOIN employees e ON er.emp_id = e.emp_id
+        JOIN departments d ON er.dept_id = d.dept_id
+        JOIN jobs j ON er.job_id = j.job_id
+    )
+    SELECT
+        e.emp_nm AS employee,
+        e.job AS job_title,
+        e.dept_nm AS department,
+        m.emp_nm AS manager,
+        e.start_date,
+        e.end_date
+    FROM employee_data e
+    INNER JOIN employee_data m ON e.manager_id = m.emp_id
+    WHERE e.emp_nm = employee_name
+    ORDER BY e.start_date DESC;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT * FROM GetEmployeeJobHistory('Edward Eslser');
+
+
+
+
+-- Implement user security on the restricted salary attribute.
+
+-- Step 1: Create the non-management user
+CREATE USER NoMgr WITH PASSWORD 'password';
+
+-- Step 2: Grant access to all tables in the public schema
+GRANT CONNECT ON DATABASE project TO NoMgr;
+GRANT USAGE ON SCHEMA public TO NoMgr;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO NoMgr;
+
+-- Step 3: Revoke access to the salaries table in the public schema
+REVOKE ALL ON TABLE public.salaries FROM NoMgr;
+-- GRANT SELECT ON TABLE public.salaries TO NoMgr;
+
+
 
