@@ -307,7 +307,7 @@ SELECT business_id,
     longitude
 FROM UDACITYPROJECT.ODS.BUSINESS;
 
-
+-- INSERT INTO FACT
 INSERT INTO fact
 SELECT
     r.review_id,
@@ -324,7 +324,7 @@ JOIN UDACITYPROJECT.ODS.USER AS u
     ON r.user_id = u.user_id;
 
 
--- INTEGRATE QUERY
+-- INTEGRATION QUERY
 SELECT
     r.review_id,
     r.stars,
