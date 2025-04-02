@@ -20,7 +20,8 @@ queries for the purpose of building reports.
 
 
 ## THE ENTITY RELATIONSHIP DIAGRAM FOR THE OPERATIONAL DATA STORE (ODS)
-![image](https://github.com/user-attachments/assets/552e051b-d3ca-4cdc-a6c6-ee0b880b2b11)
+![image](https://github.com/user-attachments/assets/ff66941f-3fae-4c2b-be6f-0f4c168e5a50)
+
 
 
 ## THE STAR SCHEMA FOR THE DATA WAREHOUSE 
