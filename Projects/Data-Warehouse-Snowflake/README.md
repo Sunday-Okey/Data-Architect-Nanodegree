@@ -1,39 +1,33 @@
-# Project: Human Resources Database Design
+# Project: Data Warehouse for Reporting & OLAP
+
+
+In this project, I designed end to end data architecture, built ingestion of data from Yelp and
+Climatic source systems, designed operational data store and data warehouse systems, transformed data from
+staging to ODS, and finally from ODS to a data warehouse system. Yelp source carries a list of businesses,
+restaurants, reviews, and ratings. Climatic data source keeps track of temperature and precipitation data.
+Both of these websites are independent sources and not related to each other. The final objective of this
+project was to write appropriate SQL to find the impact of weather on restaurant ratings.
+
+
+Mastered how to design enterprise data architecture and build a cloud-based data warehouse with Snowflake. Gained expertise on how toevaluate
+various data assets of an organization and characteristics of these data sources, designed a staging area for ingesting varieties
+of data coming from source systems, and designd an operational data source (ODS). Finally,  designed OLAP dimensional
+data models, designed ELT data processing that is capable of moving data from an ODS to a data warehouse, and wrote the SQL
+queries for the purpose of building reports.
+
+## THE DATA ARCHITECTURE PIPELINE
+<img width="583" alt="image" src="https://github.com/user-attachments/assets/bd1df48a-b1dd-4e44-8793-4f20238c5673" />
+
+
+## THE ENTITY RELATIONSHIP DIAGRAM FOR THE OPERATIONAL DATA STORE (ODS)
+![image](https://github.com/user-attachments/assets/552e051b-d3ca-4cdc-a6c6-ee0b880b2b11)
+
+
+## THE STAR SCHEMA FOR THE DATA WAREHOUSE 
+![image](https://github.com/user-attachments/assets/3e02ee17-c227-4143-b221-718b91a72b2d)
 
 
 
-
-
-## Project Overview
-
-In this project, I designed, built, and populated a database for the Human Resources (HR) Department at the imaginary Tech ABC Corp, a video game company. This project starts off with a request from the HR Manager. From there,I designed a database using the foundational principals of data architecture that is best suited to the department's needs. I went through all the steps of database architecture, creating database proposals, database entity relationship diagrams (ERD), and finally creating the database itself. This project is important, as it is a scaled-down simulation of the kind of real-world assignments data architects work on every day.
-
-## Business Scenario
-
-### Business requirement
-
-Tech ABC Corp saw explosive growth with a sudden appearance onto the gaming scene with its new AI-powered video game console. As a result, they have gone from a small 10 person operation to 200 employees and 5 locations in under a year. HR is having trouble keeping up with the growth since they are still maintaining employee information in a spreadsheet. While that worked for ten employees, it has become increasingly cumbersome to manage as the company expands.
-
-As such, the HR department has tasked me to design and build a database capable of managing their employee information.
-
-
-## Dataset
-The [HR dataset](https://video.udacity-data.com/topher/2020/July/5f2452ca_hr-dataset/hr-dataset.xlsx) is an Excel workbook consisting of 205 records, with 15 columns. The data is in human-readable format and has not been normalized at all. The data lists the names of employees at Tech ABC Corp, as well as information such as job title, department, manager's name, hire date, start date, end date, work location, and salary.
-
-## Conceptual Model
-
-<img width="545" alt="image" src="https://github.com/user-attachments/assets/8d529407-ab7e-4e23-8b44-2ceed18d5e4a" />
-
-
-## Logical Model
-
-<img width="680" alt="image" src="https://github.com/user-attachments/assets/cd2acab1-4ad2-4fa7-bdd4-fe72b2c69650" />
-
-
-
-## Phyical Model
-
-<img width="551" alt="image" src="https://github.com/user-attachments/assets/e3668719-4885-4697-8d38-540f613025f3" />
 
 
 
