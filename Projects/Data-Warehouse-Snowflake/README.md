@@ -29,6 +29,16 @@ queries for the purpose of building reports.
 
 
 
+<img width="882" alt="image" src="https://github.com/user-attachments/assets/dececc8b-2dc6-45ed-bdf6-96244a87f665" 
+
+
+
+  <img width="928" alt="image" src="https://github.com/user-attachments/assets/354d7faf-0b47-4ff7-977a-54aab9b69745" />
+
+
+
+
+
 
 
 
