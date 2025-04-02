@@ -1,4 +1,4 @@
-# Project: Data Warehouse for Reporting & OLAP
+# Project: Data Warehouse for Reporting & OLAP with Snowflake
 
 
 In this project, I designed end to end data architecture, built ingestion of data from Yelp and
