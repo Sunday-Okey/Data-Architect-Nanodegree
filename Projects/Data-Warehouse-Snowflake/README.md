@@ -29,7 +29,7 @@ queries for the purpose of building reports.
 
 
 
-<img width="882" alt="image" src="https://github.com/user-attachments/assets/dececc8b-2dc6-45ed-bdf6-96244a87f665" 
+<img width="882" alt="image" src="https://github.com/user-attachments/assets/dececc8b-2dc6-45ed-bdf6-96244a87f665" />
 
 
 
