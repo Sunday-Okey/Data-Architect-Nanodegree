@@ -9,7 +9,7 @@ Both of these websites are independent sources and not related to each other. Th
 project was to write appropriate SQL to find the impact of weather on restaurant ratings.
 
 
-Mastered how to design enterprise data architecture and build a cloud-based data warehouse with Snowflake. Gained expertise on how toevaluate
+Mastered how to design enterprise data architecture and build a cloud-based data warehouse with Snowflake. Gained expertise on how to evaluate
 various data assets of an organization and characteristics of these data sources, designed a staging area for ingesting varieties
 of data coming from source systems, and designd an operational data source (ODS). Finally,  designed OLAP dimensional
 data models, designed ELT data processing that is capable of moving data from an ODS to a data warehouse, and wrote the SQL
