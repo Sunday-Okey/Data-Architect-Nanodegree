@@ -3,6 +3,7 @@
 ## Projects
 
 ### 1. [Human Resources Database Design](https://github.com/Sunday-Okey/Data-Architect-Nanodegree/tree/main/Projects/Database-Design)
+### 2. [Data Warehouse for Reporting & OLAP With Snowflake](https://github.com/Sunday-Okey/Data-Architect-Nanodegree/tree/main/Projects/Data-Warehouse-Snowflake)
 
 
 <img width="563" alt="image" src="https://github.com/user-attachments/assets/aac4cf04-ec6a-4b6a-8417-8ae15471e094" />
