@@ -202,9 +202,7 @@ FROM UDACITYPROJECT.STAGING.CHECKIN,
 LATERAL FLATTEN(INPUT => SPLIT(CHECKINJSON:date::STRING, ', ')) date_list;
 
 
-INSERT INTO TEMPERATURE
-SELECT *
-FROM UDACITYPROJECT.STAGING.TEMPERATURE;
+
 
 
 INSERT INTO PRECIPITATION
@@ -372,4 +370,49 @@ GROUP BY
 ORDER BY f.date DESC;
 
 
+put "file:///Users/Sunday Okechukwu/Downloads/temps.csv" @my_csv_stage auto_compress=true;
 
+put 'file:///Users/Sunday Okechukwu/Downloads/precipitations.csv' @my_csv_stage auto_compress=true;
+
+
+copy into "precipitation" from @my_csv_stage/precipitations.csv.gz file_format=mycsvformat on_error='skip_file';
+copy into "temperature" from @my_csv_stage/temps.csv.gz file_format=mycsvformat on_error='skip_file';
+
+
+-- INSERT INTO dim_temperature
+-- SELECT TO_DATE(date, 'YYYYMMDD') as date, to_double(min_val) min_val, to_double(max_val) max_val, to_double(normal_min) normal_min, to_double(normal_max) normal_max
+-- FROM UDACITYPROJECT.staging.temperature
+
+-- drop table "temperature";
+-- drop table "precipitation";
+
+create or replace table dim_temperature (
+  date DATE, min_val DOUBLE, max_val DOUBLE, normal_min DOUBLE, 
+  normal_max DOUBLE);
+
+
+--   create or replace table precipitation (
+--   date STRING, precipitation STRING, precipitation_normal STRING);
+
+-- copy into precipitation from @my_csv_stage/precipitations.csv.gz file_format=mycsvformat on_error='skip_file';
+-- copy into temperature from @my_csv_stage/temps.csv.gz file_format=mycsvformat on_error='skip_file';
+
+
+create or replace table "temperature" (
+  "date" STRING, "min" STRING, "max" STRING, "normal_min" STRING, 
+  "normal_max" STRING);
+
+
+  create or replace table "precipitation" (
+  "date" STRING, "precipitation" STRING, "precipitation_normal" STRING);
+
+
+  create or replace table dim_precipitation (
+  date DATE, precipitation STRING, precipitation_normal STRING);
+
+copy into precipitation from @my_csv_stage/precipitations.csv.gz file_format=mycsvformat on_error='skip_file';
+
+
+insert into dim_precipitation
+select  date, precipitation, precipitation_normal
+from udacityproject.ods.precipitation
